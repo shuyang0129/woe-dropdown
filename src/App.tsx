@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from "react"
+import {
+  RxDotsVertical,
+  RxExit,
+  RxQuestionMarkCircled,
+  RxRocket,
+} from "react-icons/rx"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Fragment>
+      <button className='button__icon fixed-center'>
+        <RxDotsVertical className='icon' />
+      </button>
+      <ul className='dropdown-menu__list'>
+        <li className='dropdown-menu__item'>
+          <RxRocket className='icon' />
+          Get started guide
+        </li>
+        <li className='dropdown-menu__item'>
+          <RxQuestionMarkCircled className='icon' />
+          Help center
+        </li>
+        <li className='dropdown-menu__item'>
+          <RxExit className='icon' />
+          Sign out
+        </li>
+      </ul>
+    </Fragment>
+  )
 }
 
-export default App;
+export default App

@@ -1,0 +1,87 @@
+/* Position and layout */
+/* Display and visibility */
+/* Clipping */
+/* Animation */
+/* Box model (From outside in) */
+/* Background */
+/* Typography */
+
+body {
+  /* Background */
+  background-color: #eaeff8;
+  /* Typography */
+  font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.dropdown-menu__list {
+  /* Box model (From outside in) */
+  box-shadow: rgb(230, 230, 230) 0px 1px 4px;
+  border-radius: 4px;
+  padding: 16px 0px;
+  /* Background */
+  background-color: #ffffff;
+}
+
+.dropdown-menu__item {
+  /* Position and layout */
+  align-items: center;
+  gap: 8px;
+  /* Display and visibility */
+  display: flex;
+  /* Clipping */
+  overflow: hidden;
+  /* Animation */
+  transition: color 0.25s ease-in, background-color 0.25s ease-in;
+  /* Box model (From outside in) */
+  padding: 6px 24px;
+  /* Background */
+  cursor: pointer;
+  /* Typography */
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #757575;
+}
+
+.dropdown-menu__item:hover {
+  /* Background */
+  background-color: rgb(234, 239, 248, 0.38);
+  /* Typography */
+  color: #292929;
+}
+
+.dropdown-menu__item > .icon {
+  /* Typography */
+  /* font-size: 16px; */
+}
+
+.button__icon {
+  /* Position and layout */
+  justify-content: center;
+  align-items: center;
+  /* Display and visibility */
+  display: flex;
+  /* Box model (From outside in) */
+  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  /* Background */
+  background-color: #fafafa;
+  cursor: pointer;
+  /* Typography */
+}
+
+.button__icon > .icon {
+  /* Typography */
+  font-size: 16px;
+  color: #757575;
+}
+
+.fixed-center {
+  /* Position and layout */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* Display and visibility */
+  transform: translate(-50%, -50%);
+}
