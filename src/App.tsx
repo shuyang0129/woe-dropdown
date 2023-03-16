@@ -1,3 +1,5 @@
+import DropdownMenu from "components/DropdownMenu"
+import DropdownMenuItem from "components/DropdownMenu/DropdownMenuItem"
 import React, { Fragment } from "react"
 import {
   RxDotsVertical,
@@ -12,20 +14,20 @@ function App() {
       <button className='button__icon fixed-center'>
         <RxDotsVertical className='icon' />
       </button>
-      <ul className='dropdown-menu__list'>
-        <li className='dropdown-menu__item'>
-          <RxRocket className='icon' />
+      <DropdownMenu>
+        <DropdownMenuItem>
+          <RxRocket style={{ fontSize: "16px" }} />
           Get started guide
-        </li>
-        <li className='dropdown-menu__item'>
-          <RxQuestionMarkCircled className='icon' />
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <RxQuestionMarkCircled style={{ fontSize: "16px" }} />
           Help center
-        </li>
-        <li className='dropdown-menu__item'>
-          <RxExit className='icon' />
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <RxExit style={{ fontSize: "16px" }} />
           Sign out
-        </li>
-      </ul>
+        </DropdownMenuItem>
+      </DropdownMenu>
     </Fragment>
   )
 }
