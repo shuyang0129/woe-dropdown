@@ -1,5 +1,6 @@
 import { animated, config, useTransition } from "@react-spring/web"
-import React, { ReactNode } from "react"
+import withPortal from "containers/withPortal"
+import { ReactNode } from "react"
 
 interface Props {
   children?: ReactNode
@@ -30,4 +31,4 @@ const DropdownMenu = ({ children, isOpen }: Props) => {
   )
 }
 
-export default DropdownMenu
+export default withPortal(DropdownMenu, "dropdown-menu")
