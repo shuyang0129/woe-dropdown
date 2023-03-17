@@ -9,10 +9,10 @@ import {
 } from "react-icons/rx"
 
 function App() {
-  const [anchorEl, setAnchorEl] = useState<EventTarget | null>(null)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
   const isOpen = Boolean(anchorEl)
 
-  const handleClick = (event: MouseEvent) => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(isOpen ? null : event.currentTarget)
   }
 
@@ -21,7 +21,7 @@ function App() {
       <button className='button__icon fixed-center' onClick={handleClick}>
         <RxDotsVertical className='icon' />
       </button>
-      <DropdownMenu isOpen={isOpen}>
+      <DropdownMenu isOpen={isOpen} anchorEl={anchorEl}>
         <DropdownMenuItem>
           <RxRocket
             style={{ fontSize: "16px", transformOrigin: "left center" }}
