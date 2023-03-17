@@ -16,12 +16,18 @@ function App() {
     setAnchorEl(isOpen ? null : event.currentTarget)
   }
 
+  const handleClose = () => setAnchorEl(null)
+
   return (
     <Fragment>
       <button className='button__icon fixed-center' onClick={handleClick}>
         <RxDotsVertical className='icon' />
       </button>
-      <DropdownMenu isOpen={isOpen} anchorEl={anchorEl}>
+      <DropdownMenu
+        isOpen={isOpen}
+        anchorEl={anchorEl}
+        handleClose={handleClose}
+      >
         <DropdownMenuItem>
           <RxRocket
             style={{ fontSize: "16px", transformOrigin: "left center" }}
