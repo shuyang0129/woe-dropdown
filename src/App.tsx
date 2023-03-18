@@ -9,14 +9,14 @@ import {
 } from "react-icons/rx"
 
 function App() {
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
-  const isOpen = Boolean(anchorEl)
+  const [anchorElement, setAnchorElement] = useState<HTMLElement | null>(null)
+  const isOpen = Boolean(anchorElement)
 
-  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(isOpen ? null : event.currentTarget)
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
+    setAnchorElement(isOpen ? null : event.currentTarget)
   }
 
-  const handleClose = () => setAnchorEl(null)
+  const handleClose = () => setAnchorElement(null)
 
   return (
     <Fragment>
@@ -25,13 +25,11 @@ function App() {
       </button>
       <DropdownMenu
         isOpen={isOpen}
-        anchorEl={anchorEl}
+        anchorElement={anchorElement}
         handleClose={handleClose}
       >
         <DropdownMenuItem>
-          <RxRocket
-            style={{ fontSize: "16px", transformOrigin: "left center" }}
-          />
+          <RxRocket style={{ fontSize: "16px" }} />
           Get started guide
         </DropdownMenuItem>
         <DropdownMenuItem>
