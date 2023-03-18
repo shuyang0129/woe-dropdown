@@ -27,6 +27,8 @@ function App() {
         isOpen={isOpen}
         anchorElement={anchorElement}
         handleClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <DropdownMenuItem>
           <RxRocket style={{ fontSize: "16px" }} />
