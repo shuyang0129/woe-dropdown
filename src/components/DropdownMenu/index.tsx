@@ -1,12 +1,35 @@
 import { animated, config, useTransition } from "@react-spring/web"
 import withPortal from "containers/withPortal"
-import { ReactNode, useEffect, useRef } from "react"
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react"
 
 interface Props {
   children?: ReactNode
   anchorEl: HTMLElement | null
   isOpen: boolean
   handleClose: () => void
+}
+
+const getMenuPosition = (element: HTMLElement) => {
+  const { top, left, width, height } = element.getBoundingClientRect()
+  return { top: `${top + height}px`, left: `${left + width}px` }
+}
+
+const setMenuPosition = (
+  anchorElement?: HTMLElement | null,
+  positionedElement?: HTMLElement | null
+) => {
+  if (!anchorElement || !positionedElement) return
+
+  const { top, left } = getMenuPosition(anchorElement)
+
+  positionedElement.style.top = top
+  positionedElement.style.left = left
 }
 
 const DropdownMenu = ({ children, isOpen, anchorEl, handleClose }: Props) => {
@@ -39,10 +62,8 @@ const DropdownMenu = ({ children, isOpen, anchorEl, handleClose }: Props) => {
     return () => window.removeEventListener("click", handleClickOutside)
   }, [anchorEl, handleClose, isOpen])
 
-  useEffect(() => {
-    if (isOpen) {
-      console.log(anchorEl?.getBoundingClientRect())
-    }
+  useLayoutEffect(() => {
+    if (isOpen) setMenuPosition(anchorEl, menuRef.current)
   }, [anchorEl, isOpen])
 
   return transition(
