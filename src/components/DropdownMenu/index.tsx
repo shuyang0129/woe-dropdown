@@ -1,6 +1,6 @@
 import { animated, config, useTransition } from '@react-spring/web'
 import withPortal from 'containers/withPortal'
-import { ReactNode, useCallback, useEffect, useLayoutEffect, useRef } from 'react'
+import { CSSProperties, ReactNode, useCallback, useEffect, useLayoutEffect, useRef } from 'react'
 import { debounce } from 'utils/debounce'
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
   handleClose: () => void
   anchorOrigin?: Origin
   transformOrigin?: Origin
+  sx?: CSSProperties
 }
 
 interface Origin {
@@ -46,6 +47,7 @@ const DropdownMenu = ({
   handleClose,
   anchorOrigin = { vertical: 'bottom', horizontal: 'left' },
   transformOrigin = { vertical: 'top', horizontal: 'left' },
+  sx = {},
 }: Props) => {
   const menuRef = useRef<HTMLUListElement>(null)
   const transition = useTransition(isOpen, {
@@ -124,15 +126,15 @@ const DropdownMenu = ({
   }, [setPosition])
 
   return transition(
-    ({ opacity, transform }, item) =>
+    (animation, item) =>
       item && (
         <animated.ul
           className="dropdown-menu__list"
           style={{
-            opacity,
-            transform,
             position: 'fixed',
             transformOrigin: getTransformOrigin(transformOrigin),
+            ...sx,
+            ...animation,
           }}
           ref={menuRef}
         >
