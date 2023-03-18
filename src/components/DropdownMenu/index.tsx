@@ -1,6 +1,7 @@
 import { animated, config, useTransition } from '@react-spring/web'
 import withPortal from 'containers/withPortal'
 import { ReactNode, useCallback, useEffect, useLayoutEffect, useRef } from 'react'
+import { debounce } from 'utils/debounce'
 
 interface Props {
   children?: ReactNode
@@ -114,6 +115,13 @@ const DropdownMenu = ({
   useLayoutEffect(() => {
     if (isOpen) setPosition()
   }, [anchorElement, isOpen, setPosition])
+
+  useEffect(() => {
+    const handleResize = debounce(setPosition)
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [setPosition])
 
   return transition(
     ({ opacity, transform }, item) =>
