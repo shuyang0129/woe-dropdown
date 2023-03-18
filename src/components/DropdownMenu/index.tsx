@@ -1,29 +1,41 @@
 import { animated, config, useTransition } from "@react-spring/web"
 import withPortal from "containers/withPortal"
-import { ReactNode, useEffect, useLayoutEffect, useRef } from "react"
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react"
 
 interface Props {
   children?: ReactNode
   anchorElement: HTMLElement | null
   isOpen: boolean
   handleClose: () => void
+  anchorOrigin?: AnchorOrigin
 }
 
-const getPosition = (element: HTMLElement) => {
-  const { top, left, width, height } = element.getBoundingClientRect()
-  return { top: `${top + height}px`, left: `${left + width}px` }
+interface AnchorOrigin {
+  vertical: "top" | "center" | "bottom"
+  horizontal: "left" | "center" | "right"
 }
 
-const setPosition = (
-  anchorElement?: HTMLElement | null,
-  positionedElement?: HTMLElement | null
+const getOffsetX = (
+  element: HTMLElement,
+  origin: AnchorOrigin["horizontal"]
 ) => {
-  if (!anchorElement || !positionedElement) return
+  const { width } = element.getBoundingClientRect()
+  if (origin === "right") return width
+  if (origin === "center") return width / 2
+  return 0
+}
 
-  const { top, left } = getPosition(anchorElement)
-
-  positionedElement.style.top = top
-  positionedElement.style.left = left
+const getOffsetY = (element: HTMLElement, origin: AnchorOrigin["vertical"]) => {
+  const { height } = element.getBoundingClientRect()
+  if (origin === "bottom") return height
+  if (origin === "center") return height / 2
+  return 0
 }
 
 const DropdownMenu = ({
@@ -31,6 +43,7 @@ const DropdownMenu = ({
   isOpen,
   anchorElement,
   handleClose,
+  anchorOrigin = { vertical: "bottom", horizontal: "left" },
 }: Props) => {
   const menuRef = useRef<HTMLUListElement>(null)
   const transition = useTransition(isOpen, {
@@ -61,9 +74,34 @@ const DropdownMenu = ({
     return () => window.removeEventListener("click", handleClickOutside)
   }, [anchorElement, handleClose, isOpen])
 
+  const getPosition = useCallback(() => {
+    if (!anchorElement) return
+
+    const { top, left } = anchorElement.getBoundingClientRect()
+    const offsetX = getOffsetX(anchorElement, anchorOrigin.horizontal)
+    const offsetY = getOffsetY(anchorElement, anchorOrigin.vertical)
+
+    return { top: `${top + offsetY}px`, left: `${left + offsetX}px` }
+  }, [anchorElement, anchorOrigin.horizontal, anchorOrigin.vertical])
+
+  const setPosition = useCallback(() => {
+    if (!anchorElement || !menuRef.current) return
+
+    const position = getPosition()
+
+    if (!!position) {
+      const { top, left } = position
+      menuRef.current.style.top = top
+      menuRef.current.style.left = left
+    }
+  }, [anchorElement, getPosition])
+
   useLayoutEffect(() => {
-    if (isOpen) setPosition(anchorElement, menuRef.current)
-  }, [anchorElement, isOpen])
+    if (isOpen) {
+      console.log("useLayoutEffect")
+      setPosition()
+    }
+  }, [anchorElement, isOpen, setPosition])
 
   return transition(
     ({ opacity, transform }, item) =>
