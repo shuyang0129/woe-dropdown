@@ -1,12 +1,7 @@
-import DropdownMenu from "components/DropdownMenu"
-import DropdownMenuItem from "components/DropdownMenu/DropdownMenuItem"
-import { Fragment, useState, MouseEvent } from "react"
-import {
-  RxDotsVertical,
-  RxExit,
-  RxQuestionMarkCircled,
-  RxRocket,
-} from "react-icons/rx"
+import DropdownMenu from 'components/DropdownMenu'
+import DropdownMenuItem from 'components/DropdownMenu/DropdownMenuItem'
+import { Fragment, useState, MouseEvent } from 'react'
+import { RxDotsVertical, RxExit, RxQuestionMarkCircled, RxRocket } from 'react-icons/rx'
 
 function App() {
   const [anchorElement, setAnchorElement] = useState<HTMLElement | null>(null)
@@ -20,26 +15,26 @@ function App() {
 
   return (
     <Fragment>
-      <button className='button__icon fixed-center' onClick={handleClick}>
-        <RxDotsVertical className='icon' />
+      <button className="button__icon fixed-center" onClick={handleClick}>
+        <RxDotsVertical className="icon" />
       </button>
       <DropdownMenu
         isOpen={isOpen}
         anchorElement={anchorElement}
         handleClose={handleClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
         <DropdownMenuItem>
-          <RxRocket style={{ fontSize: "16px" }} />
+          <RxRocket style={{ fontSize: '16px' }} />
           Get started guide
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <RxQuestionMarkCircled style={{ fontSize: "16px" }} />
+          <RxQuestionMarkCircled style={{ fontSize: '16px' }} />
           Help center
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <RxExit style={{ fontSize: "16px" }} />
+          <RxExit style={{ fontSize: '16px' }} />
           Sign out
         </DropdownMenuItem>
       </DropdownMenu>

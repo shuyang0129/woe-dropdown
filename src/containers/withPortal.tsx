@@ -1,5 +1,5 @@
-import { ComponentType } from "react"
-import { createPortal } from "react-dom"
+import { ComponentType } from 'react'
+import { createPortal } from 'react-dom'
 
 /**
  * @name withPortal
@@ -14,20 +14,12 @@ import { createPortal } from "react-dom"
  * - Wrap your component in withPortal, ex: export default withPortal(DropdownMenu, 'dropdown-menu')
  * - Go to index.html and create a new div with id and set to elementId, ex: <div id="dropdown-menu" />
  */
-function withPortal<T extends {}>(
-  Component: ComponentType<T>,
-  elementId: string
-) {
+function withPortal<T extends {}>(Component: ComponentType<T>, elementId: string) {
   const NewComponent = (props: T) => {
-    return createPortal(
-      <Component {...props} />,
-      document.getElementById(elementId)!
-    )
+    return createPortal(<Component {...props} />, document.getElementById(elementId)!)
   }
 
-  NewComponent.displayName = `withPortal(${
-    Component.displayName || Component.name || "Component"
-  })`
+  NewComponent.displayName = `withPortal(${Component.displayName || Component.name || 'Component'})`
 
   return NewComponent
 }

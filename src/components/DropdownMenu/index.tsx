@@ -1,12 +1,6 @@
-import { animated, config, useTransition } from "@react-spring/web"
-import withPortal from "containers/withPortal"
-import {
-  ReactNode,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-} from "react"
+import { animated, config, useTransition } from '@react-spring/web'
+import withPortal from 'containers/withPortal'
+import { ReactNode, useCallback, useEffect, useLayoutEffect, useRef } from 'react'
 
 interface Props {
   children?: ReactNode
@@ -18,30 +12,30 @@ interface Props {
 }
 
 interface Origin {
-  vertical: "top" | "center" | "bottom" | number
-  horizontal: "left" | "center" | "right" | number
+  vertical: 'top' | 'center' | 'bottom' | number
+  horizontal: 'left' | 'center' | 'right' | number
 }
 
-const getOffsetLeft = (element: HTMLElement, origin: Origin["horizontal"]) => {
+const getOffsetLeft = (element: HTMLElement, origin: Origin['horizontal']) => {
   const width = element.offsetWidth
-  if (typeof origin === "number") return origin
-  if (origin === "right") return width
-  if (origin === "center") return width / 2
+  if (typeof origin === 'number') return origin
+  if (origin === 'right') return width
+  if (origin === 'center') return width / 2
   return 0
 }
 
-const getOffsetTop = (element: HTMLElement, origin: Origin["vertical"]) => {
+const getOffsetTop = (element: HTMLElement, origin: Origin['vertical']) => {
   const height = element.offsetHeight
-  if (typeof origin === "number") return origin
-  if (origin === "bottom") return height
-  if (origin === "center") return height / 2
+  if (typeof origin === 'number') return origin
+  if (origin === 'bottom') return height
+  if (origin === 'center') return height / 2
   return 0
 }
 
 const getTransformOrigin = (transformOrigin: Origin) => {
   return [transformOrigin.horizontal, transformOrigin.vertical]
-    .map(value => (typeof value === "number" ? `${value}px` : value))
-    .join(" ")
+    .map(value => (typeof value === 'number' ? `${value}px` : value))
+    .join(' ')
 }
 
 const DropdownMenu = ({
@@ -49,14 +43,14 @@ const DropdownMenu = ({
   isOpen,
   anchorElement,
   handleClose,
-  anchorOrigin = { vertical: "bottom", horizontal: "left" },
-  transformOrigin = { vertical: "top", horizontal: "left" },
+  anchorOrigin = { vertical: 'bottom', horizontal: 'left' },
+  transformOrigin = { vertical: 'top', horizontal: 'left' },
 }: Props) => {
   const menuRef = useRef<HTMLUListElement>(null)
   const transition = useTransition(isOpen, {
-    from: { opacity: 0, transform: "scale(0.8)" },
-    enter: { opacity: 1, transform: "scale(1.0)" },
-    leave: { opacity: 0, transform: "scale(0.8)" },
+    from: { opacity: 0, transform: 'scale(0.8)' },
+    enter: { opacity: 1, transform: 'scale(1.0)' },
+    leave: { opacity: 0, transform: 'scale(0.8)' },
     config: config.stiff,
   })
 
@@ -76,9 +70,9 @@ const DropdownMenu = ({
       if (!isAnchorElementClicked && !isMenuElementClicked) handleClose()
     }
 
-    window.addEventListener("click", handleClickOutside)
+    window.addEventListener('click', handleClickOutside)
 
-    return () => window.removeEventListener("click", handleClickOutside)
+    return () => window.removeEventListener('click', handleClickOutside)
   }, [anchorElement, handleClose, isOpen])
 
   const getPosition = useCallback(() => {
@@ -87,16 +81,10 @@ const DropdownMenu = ({
 
     const { top, left } = anchorElement.getBoundingClientRect()
 
-    const anchorOffsetLeft = getOffsetLeft(
-      anchorElement,
-      anchorOrigin.horizontal
-    )
+    const anchorOffsetLeft = getOffsetLeft(anchorElement, anchorOrigin.horizontal)
     const anchorOffsetTop = getOffsetTop(anchorElement, anchorOrigin.vertical)
 
-    const transformOffsetX = getOffsetLeft(
-      menuElement,
-      transformOrigin.horizontal
-    )
+    const transformOffsetX = getOffsetLeft(menuElement, transformOrigin.horizontal)
     const transformOffsetY = getOffsetTop(menuElement, transformOrigin.vertical)
 
     return {
@@ -131,19 +119,19 @@ const DropdownMenu = ({
     ({ opacity, transform }, item) =>
       item && (
         <animated.ul
-          className='dropdown-menu__list'
+          className="dropdown-menu__list"
           style={{
             opacity,
             transform,
-            position: "fixed",
+            position: 'fixed',
             transformOrigin: getTransformOrigin(transformOrigin),
           }}
           ref={menuRef}
         >
           {children}
         </animated.ul>
-      )
+      ),
   )
 }
 
-export default withPortal(DropdownMenu, "dropdown-menu")
+export default withPortal(DropdownMenu, 'dropdown-menu')
