@@ -51,7 +51,7 @@ const DropdownMenu = ({
   sx = {},
   disableScrollLock = false,
 }: Props) => {
-  const menuRef = useRef<HTMLUListElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null)
   const transition = useTransition(isOpen, {
     from: { opacity: 0, transform: 'scale(0.8)' },
     enter: { opacity: 1, transform: 'scale(1.0)' },
@@ -142,7 +142,7 @@ const DropdownMenu = ({
   return transition(
     (animation, item) =>
       item && (
-        <animated.ul
+        <animated.div
           className="dropdown-menu__list"
           style={{
             position: 'fixed',
@@ -153,7 +153,7 @@ const DropdownMenu = ({
           ref={menuRef}
         >
           {children}
-        </animated.ul>
+        </animated.div>
       ),
   )
 }

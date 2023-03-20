@@ -5,7 +5,7 @@ interface Props {
 }
 
 const DropdownMenuItem = ({ children }: Props) => {
-  return <li className="dropdown-menu__item">{children}</li>
+  return <div className="dropdown-menu__item">{children}</div>
 }
 
 export default DropdownMenuItem
