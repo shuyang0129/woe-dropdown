@@ -11,6 +11,7 @@ interface Props {
   anchorOrigin?: Origin
   transformOrigin?: Origin
   sx?: CSSProperties
+  disableScrollLock?: boolean
 }
 
 interface Origin {
@@ -48,6 +49,7 @@ const DropdownMenu = ({
   anchorOrigin = { vertical: 'bottom', horizontal: 'left' },
   transformOrigin = { vertical: 'top', horizontal: 'left' },
   sx = {},
+  disableScrollLock = false,
 }: Props) => {
   const menuRef = useRef<HTMLUListElement>(null)
   const transition = useTransition(isOpen, {
@@ -56,6 +58,19 @@ const DropdownMenu = ({
     leave: { opacity: 0, transform: 'scale(0.8)' },
     config: config.stiff,
   })
+
+  // prevent scroll when dropdown menu is open
+  useEffect(() => {
+    if (disableScrollLock) return
+
+    const htmlElement = document.documentElement
+
+    if (isOpen) htmlElement.style.overflow = 'hidden'
+
+    return () => {
+      htmlElement.style.overflow = 'auto'
+    }
+  }, [disableScrollLock, isOpen])
 
   // handle close when clicking outside of dropdown menu
   useEffect(() => {
@@ -74,7 +89,6 @@ const DropdownMenu = ({
     }
 
     window.addEventListener('click', handleClickOutside)
-
     return () => window.removeEventListener('click', handleClickOutside)
   }, [anchorElement, handleClose, isOpen])
 

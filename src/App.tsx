@@ -15,6 +15,9 @@ function App() {
 
   return (
     <Fragment>
+      <div style={{ width: '100%', height: '100vh', backgroundColor: 'transparent' }} />
+      <div style={{ width: '100%', height: '100vh', backgroundColor: 'lightcyan' }} />
+      <div style={{ width: '100%', height: '100vh', backgroundColor: 'lightgoldenrodyellow' }} />
       <button className="button__icon fixed-center" onClick={handleClick}>
         <RxDotsVertical className="icon" />
       </button>
