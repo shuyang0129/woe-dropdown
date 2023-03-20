@@ -145,9 +145,9 @@ const DropdownMenu = ({
         <animated.div
           className="dropdown-menu__list"
           style={{
+            ...sx,
             position: 'fixed',
             transformOrigin: getTransformOrigin(transformOrigin),
-            ...sx,
             ...animation,
           }}
           ref={menuRef}
