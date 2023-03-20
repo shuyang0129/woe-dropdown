@@ -1,4 +1,4 @@
-import { ComponentType } from 'react'
+import { ComponentType, useLayoutEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 /**
@@ -12,11 +12,28 @@ import { createPortal } from 'react-dom'
  * Get component displayName:  https://react.dev/reference/react-dom/createPortal
  * @tutorial
  * - Wrap your component in withPortal, ex: export default withPortal(DropdownMenu, 'dropdown-menu')
- * - Go to index.html and create a new div with id and set to elementId, ex: <div id="dropdown-menu" />
  */
 function withPortal<T extends {}>(Component: ComponentType<T>, elementId: string) {
   const NewComponent = (props: T) => {
-    return createPortal(<Component {...props} />, document.getElementById(elementId)!)
+    const [container, setContainer] = useState<HTMLElement | null>(null)
+
+    useLayoutEffect(() => {
+      let _container = document.getElementById(elementId)
+
+      if (!_container) {
+        _container = document.createElement('div')
+        _container.setAttribute('id', elementId)
+        document.body.appendChild(_container)
+      }
+
+      setContainer(_container)
+
+      return () => _container?.remove()
+    }, [])
+
+    if (!container) return null
+
+    return createPortal(<Component {...props} />, container)
   }
 
   NewComponent.displayName = `withPortal(${Component.displayName || Component.name || 'Component'})`
