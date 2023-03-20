@@ -10,10 +10,12 @@ body {
   /* Background */
   background-color: #eaeff8;
   /* Typography */
-  font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: sohne, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .dropdown-menu__list {
+  /* Position and layout */
+  z-index: 55px;
   /* Box model (From outside in) */
   box-shadow: rgb(230, 230, 230) 0px 1px 4px;
   border-radius: 4px;
