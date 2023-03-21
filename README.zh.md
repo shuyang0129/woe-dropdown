@@ -10,13 +10,22 @@
 - ✅ 根據按鈕位置、AnchorOrigin、TransformOrigin，將下拉式選單顯示在正確的位置上
 - ✅ 實作當下拉式選單開啟時，鎖定 Body 捲動行為
 
+<div align="center">
+  <image src="src/assets/images/demo.png" alt="demo" width="70%" />
+</div>
+
 ## 📔 Categories
 
-- [使用技術](#technologies)
-- [專案設定](#jump-start)
-- [DropdownMenu 元件 Props 與使用說明](#document-and-examples)
+- [Playground](#👾-playground)
+- [使用技術](#🔨-technologies)
+- [專案設定](#⚡️-jump-start)
+- [DropdownMenu 元件 Props 與使用說明](#📖-documentation-and-examples)
 
-## Technologies 🔨
+## 👾 Playground
+
+[Open in CodeSandbox](https://codesandbox.io/s/github/shuyang0129/woe-dropdown)
+
+## 🔨 Technologies
 
 專案主要使用的技術：
 
@@ -35,7 +44,7 @@ $ npm install
 $ npm start
 ```
 
-## 📖 Documentation and Examples
+## 📖 DropdownMenu 元件 Props 與使用說明
 
 ```tsx
 function App() {
