@@ -5,8 +5,8 @@
 - ✅ 使用 React Spring，完成下拉式選單動畫
 - ✅ 使用 React Portal，動態產生 DOM 節點，並將下拉式選單元件渲染至該節點內
 - ✅ 實作當下拉式選單開啟時，點擊按鈕或選單外側，關閉下拉式選單功能
-- ✅ 提供 AnchorOrigin 變數，讓開發者可以指定下拉式選單要對齊按鈕中的哪個位置
-- ✅ 提供 TransformOrigin 變數，讓開發者可以指定下拉式選單動畫的原點，以及要使用下拉式選單中的哪個位置，對齊按鈕原點
+- ✅ 提供 AnchorOrigin 變數，指定下拉式選單要對齊按鈕中的哪個位置
+- ✅ 提供 TransformOrigin 變數，指定要使用下拉式選單的哪個位置作為原點，作為動畫特效的起始點以及用來對齊按鈕原點
 - ✅ 根據按鈕位置、AnchorOrigin、TransformOrigin，將下拉式選單顯示在正確的位置上
 - ✅ 實作當下拉式選單開啟時，鎖定 Body 捲動行為
 
@@ -16,10 +16,10 @@
 
 ## 📔 Categories
 
-- [Playground](#👾-playground)
-- [使用技術](#🔨-technologies)
-- [專案設定](#⚡️-jump-start)
-- [DropdownMenu 元件 Props 與使用說明](#📖-documentation-and-examples)
+- [Playground](#-playground)
+- [使用技術](#-technologies)
+- [專案設定](#%EF%B8%8F-jump-start)
+- [DropdownMenu 元件 Props 與使用說明](#-dropdownmenu-元件-props-與使用說明)
 
 ## 👾 Playground
 
