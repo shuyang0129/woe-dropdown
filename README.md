@@ -1,46 +1,158 @@
-# Getting Started with Create React App
+# Implementing a dropdown menu component
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+English | [繁體中文](./README.zh.md)
 
-## Available Scripts
+In different projects, there are often recurring and challenging functionalities that need to be implemented. Therefore, I want to practice/imitate/research by finding challenging functionalities at work or on the internet, and narrow the scope to a single function rather than an entire project, hoping to improve front-end capabilities through more small exercises. This project aims to practice implementing a shared component of a dropdown menu, with the reference prototype being the [Popover](https://mui.com/material-ui/api/popover/) component of [React MUI](https://mui.com/). Here are several key points that this challenge will complete:
 
-In the project directory, you can run:
+- ✅ Use React Spring to complete the dropdown menu animation
+- ✅ Use React Portal to dynamically generate DOM nodes and render the dropdown menu component to the node
+- ✅ Implement the function of closing the dropdown menu when the button or outside of menu is clicked
+- ✅ Provide the AnchorOrigin prop to specify which position of the button the dropdown menu should align with
+- ✅ Provide the TransformOrigin prop to specify which position of the dropdown menu to use as the origin, as the starting point of the animation effect, and to align with the button origin
+- ✅ According to the button position, AnchorOrigin, and TransformOrigin, display the dropdown menu in the correct position
+- ✅ Implement locking body scroll behavior when the dropdown menu is open
 
-### `npm start`
+<div align="center">
+  <image src="src/assets/images/demo.png" alt="demo" width="70%" />
+</div>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 📔 Categories
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- [Playground](#-playground)
+- [Technologies](#-technologies)
+- [Jump Start](#%EF%B8%8F-jump-start)
+- [DropdownMenu Component Props and Usage Instructions](#-dropdownmenu-component-props-and-usage-instructions)
 
-### `npm test`
+## 👾 Playground
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[Open in CodeSandbox](https://codesandbox.io/s/github/shuyang0129/woe-dropdown)
 
-### `npm run build`
+## 🔨 Technologies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The main technologies used in the project:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React version: 18.2.0
+- Typescript version: 4.9.5
+- React Spring version: 9.1.7
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ⚡️ Jump Start
 
-### `npm run eject`
+To use this project for local development, follow the steps below:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+$ git clone git@github.com:shuyang0129/woe-dropdown.git
+$ cd woe-dropdown
+$ npm install
+$ npm start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📖 DropdownMenu Component Props and Usage Instructions
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```tsx
+function App() {
+  const [anchorElement, setAnchorElement] = useState<HTMLElement | null>(null)
+  const isOpen = Boolean(anchorElement)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
+    setAnchorElement(isOpen ? null : event.currentTarget)
+  }
 
-## Learn More
+  const handleClose = () => setAnchorElement(null)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  return (
+    <Fragment>
+      <ButtonToToggleDropdownMenu onClick={handleClick} />
+      <DropdownMenu
+        isOpen={isOpen}
+        anchorElement={anchorElement}
+        handleClose={handleClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        {/* DropdownMenuItems */}
+      </DropdownMenu>
+    </Fragment>
+  )
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The following table describes the props for the <DropdownMenu> component:
+
+<table>
+    <thead>
+        <tr>
+            <th>Prop</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>children</td>
+            <td><code>ReactNode</code></td>
+            <td><code>undefined</code></td>
+            <td>
+                The content to be displayed in the dropdown menu.
+            </td>
+        </tr>
+        <tr>
+            <td>anchorElement*</td>
+            <td><code>HTMLElement | null</code></td>
+            <td></td>
+            <td>
+                The button that triggers the opening of the dropdown menu.
+            </td>
+        </tr>
+        <tr>
+            <td>isOpen*</td>
+            <td><code>boolean</code></td>
+            <td></td>
+            <td>
+                The open state of the dropdown menu.
+            </td>
+        </tr>
+        <tr>
+            <td>handleClose*</td>
+            <td><code>() => void</code></td>
+            <td></td>
+            <td>
+                The function to close the dropdown menu.
+            </td>
+        </tr>
+        <tr>
+            <td>anchorOrigin</td>
+            <td>
+                <code>{ horizontal: 'center' | 'left' | 'right' | number, vertical: 'bottom' | 'center' | 'top' | number }</code>
+            </td>
+            <td>
+                <code>{ horizontal: 'left', vertical: 'bottom' }</code>
+            </td>
+            <td>Specifies the anchor point of the trigger button.</td>
+        </tr>
+        <tr>
+            <td>transformOrigin</td>
+            <td>
+                <code>{ horizontal: 'center' | 'left' | 'right' | number, vertical: 'bottom' | 'center' | 'top' | number }</code>
+            </td>
+            <td>
+                <code>{ horizontal: 'left', vertical: 'top' }</code>
+            </td>
+            <td>Specifies the anchor point of the dropdown menu.</td>
+        </tr>
+        <tr>
+            <td>sx</td>
+            <td><code>CSSProperties</code></td>
+            <td><code>{}</code></td>
+            <td>Customize the style of the component.</td>
+        </tr>
+        <tr>
+            <td>disableScrollLock</td>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td>
+            Disables the scroll lock behavior on the <code>Body</code> when the dropdown menu is open. If you wish to ignore or customize more complex locking behavior, you can turn off this feature through this <code>Prop</code>.
+            </td>
+        </tr>
+    </tbody>
+</table>
